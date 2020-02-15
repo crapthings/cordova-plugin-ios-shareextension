@@ -1,0 +1,58 @@
+{
+  "name": "cordova-plugin-ios-shareextension",
+  "version": "1.0.0",
+  "description": "Cordova iOS Share Extension",
+  "author": "crapthings <crapthings@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova",
+    "phonegap",
+    "ios",
+    "share extension"
+  ],
+  "homepage": "https://github.com/j3k0/cordova-plugin-openwith",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j3k0/cordova-plugin-openwith.git"
+  },
+  "bugs": {
+    "url": "https://github.com/j3k0/cordova-plugin-openwith/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-ios-shareextension",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "scripts": {
+    "fix": "npx standard --fix \"hooks/*.js\" \"www/*.js\" "
+  },
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "path": "^0.12.7",
+    "plist": "^2.1.0",
+    "xcode": "^2.1.0",
+    "q": "^1.5.1"
+  },
+  "files": [
+    "src/ios/shareextension.swift",
+    "src/ios/ShareExtension/MainInterface.storyboard",
+    "src/ios/ShareExtension/ShareExtension-Info.plist",
+    "src/ios/ShareExtension/ShareViewController.h",
+    "src/ios/ShareExtension/ShareViewController.swift",
+    "www/shareextension.js",
+    "hooks/iosAddTarget.js",
+    "hooks/iosRemoveTarget.js",
+    "hooks/iosCopyShareExtension.js",
+    "hooks/npmInstall.js",
+    "plugin.xml",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "devDependencies": {
+    "standard": "^14.3.1"
+  }
+}

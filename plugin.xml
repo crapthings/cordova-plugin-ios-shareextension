@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  id="cordova-plugin-ios-shareextension"
+  version="2.0.0">
+
+  <name>Share Extension</name>
+	<description>Cordova iOS Share Extension</description>
+
+  <repo></repo>
+  <issue></issue>
+
+	<license>MIT</license>
+  <keywords>cordova, phonegap, ios, share extension</keywords>
+
+  <platform name="ios">
+    <preference name="IOS_URL_NAME" />
+    <preference name="IOS_URL_SCHEME" />
+    <preference name="IOS_GROUP_IDENTIFIER" />
+
+
+    <js-module src="www/shareextension.js" name="shareextension">
+      <clobbers target="cordova.shareextension" />
+    </js-module>
+
+    <config-file target="config.xml" parent="/*">
+      <feature name="ShareExtension">
+        <param name="ios-package" value="ShareExtension" />
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+    <config-file target="config.xml" parent="/*">
+      <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleURLName</key>
+          <string>$IOS_URL_NAME</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>$IOS_URL_SCHEME</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+
+    <config-file target="*-Debug.plist" parent="com.apple.security.application-groups">
+      <array>
+        <string>$IOS_GROUP_IDENTIFIER</string>
+      </array>
+    </config-file>
+    <config-file target="*-Release.plist" parent="com.apple.security.application-groups">
+      <array>
+        <string>$IOS_GROUP_IDENTIFIER</string>
+      </array>
+    </config-file>
+
+    <source-file src="src/ios/shareextension.swift" />
+
+    <hook type="before_plugin_install" src="hooks/npmInstall.js" />
+    <hook type="before_plugin_install" src="hooks/iosCopyShareExtension.js" />
+    <hook type="after_plugin_add" src="hooks/iosAddTarget.js" />
+    <hook type="before_plugin_uninstall" src="hooks/iosRemoveTarget.js" />
+
+    <framework src="MobileCoreServices.framework" />
+    <framework src="UIKit.framework" />
+
+    <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
+  </platform>
+</plugin>
