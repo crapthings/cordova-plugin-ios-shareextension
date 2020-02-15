@@ -5,12 +5,15 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var textarea: UITextView!
     @IBOutlet weak var done: UIButton!
 
+    var UrlScheme = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let bundleIdentifier = Bundle.main.bundleIdentifier!
         let userDefaults = UserDefaults(suiteName: "group.\(bundleIdentifier)")!
         let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.\(bundleIdentifier)")
+        UrlScheme = Bundle.main.object(forInfoDictionaryKey: "UrlScheme") as! String
 
         var urls: [String] = []
 
@@ -44,13 +47,13 @@ class ShareViewController: UIViewController {
             userDefaults.set(urls, forKey: "urls")
             userDefaults.synchronize()
             self.textarea.insertText("\(urls)\n\n")
-            self.openURL(URL(string:"openwith://test")!)
+            self.openURL(URL(string: "\(self.UrlScheme)://")!)
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         }
     }
 
     @IBAction func btn(_ sender: UIButton) {
-        self.openURL(URL(string:"openwith://test")!)
+        self.openURL(URL(string: "\(self.UrlScheme)://")!)
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
     }
 
