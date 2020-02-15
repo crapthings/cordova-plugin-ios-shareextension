@@ -12,7 +12,8 @@
     }
 
     @objc func sendUrls() {
-        let userDefaults = UserDefaults(suiteName: "group.com.idibwofa6eg9w4.bk46f44qira.shareextension")!
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
+        let userDefaults = UserDefaults(suiteName: "group.\(bundleIdentifier).shareextension")!
         let urls = userDefaults.array(forKey: "urls")
         let result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: urls)
         result!.keepCallback = true

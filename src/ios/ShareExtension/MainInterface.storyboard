@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j1y-V4-xli">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -10,29 +10,35 @@
         <!--Share View Controller-->
         <scene sceneID="ceB-am-kn3">
             <objects>
-                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModule="share" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModule="shareextension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gnV-so-be2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aGq-N1-5dN">
-                                <rect key="frame" x="20" y="44" width="374" height="419"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aGq-N1-5dN">
+                                <rect key="frame" x="16" y="0.0" width="288" height="410"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZW-zs-jog">
-                                <rect key="frame" x="184" y="598" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZW-zs-jog">
+                                <rect key="frame" x="144.5" y="430" width="31" height="30"/>
+                                <state key="normal" title="确定"/>
                                 <connections>
                                     <action selector="btn:" destination="j1y-V4-xli" eventType="touchDown" id="fj1-3F-B0F"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VZW-zs-jog" firstAttribute="top" secondItem="aGq-N1-5dN" secondAttribute="bottom" constant="20" id="7lP-mv-eCf"/>
+                            <constraint firstItem="aGq-N1-5dN" firstAttribute="top" secondItem="JgT-xq-VFz" secondAttribute="top" id="I5f-IF-5c1"/>
+                            <constraint firstItem="VZW-zs-jog" firstAttribute="centerX" secondItem="gnV-so-be2" secondAttribute="centerX" id="JzK-kR-J2K"/>
+                            <constraint firstItem="JgT-xq-VFz" firstAttribute="bottom" secondItem="VZW-zs-jog" secondAttribute="bottom" constant="20" id="TXa-2C-f2w"/>
+                            <constraint firstItem="aGq-N1-5dN" firstAttribute="centerX" secondItem="gnV-so-be2" secondAttribute="centerX" id="Zet-Xy-Kn5"/>
+                            <constraint firstItem="aGq-N1-5dN" firstAttribute="leading" secondItem="gnV-so-be2" secondAttribute="leadingMargin" id="gNO-Dv-m4p"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JgT-xq-VFz"/>
                     </view>
                     <connections>
