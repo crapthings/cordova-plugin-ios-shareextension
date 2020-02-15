@@ -5,11 +5,12 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var textarea: UITextView!
     @IBOutlet weak var done: UIButton!
 
-    let userDefaults = UserDefaults(suiteName: "group.com.idibwofa6eg9w4.bk46f44qira.shareextension")!
-    let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.idibwofa6eg9w4.bk46f44qira.shareextension")
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
+        let userDefaults = UserDefaults(suiteName: "group.\(bundleIdentifier)")!
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.\(bundleIdentifier)")
 
         var urls: [String] = []
 
@@ -23,15 +24,15 @@ class ShareViewController: UIViewController {
             if let itemProviders = extensionItem.attachments {
                 for itemProvider in itemProviders {
                     group.enter()
-                    itemProvider.loadItem(forTypeIdentifier: kUTTypeItem as String, options: nil, completionHandler: { text, error in
-                        let sourceUrl: URL = text as! URL
-                        let filename = (text as! URL).lastPathComponent
+                    itemProvider.loadItem(forTypeIdentifier: kUTTypeItem as String, options: nil, completionHandler: { url, error in
+                        let sourceUrl: URL = url as! URL
+                        let filename = sourceUrl.lastPathComponent
                         let extname = sourceUrl.pathExtension
                         let newname = "\(UUID().uuidString).\(extname)"
-                        let targetUrl = self.containerURL?.appendingPathComponent(newname)
+                        let targetUrl = (containerURL?.appendingPathComponent(newname))!
                         do {
-                            try FileManager.default.copyItem(at: sourceUrl, to: targetUrl!)
-                            urls.append("\(targetUrl!)")
+                            try FileManager.default.copyItem(at: sourceUrl, to: targetUrl)
+                            urls.append("\(targetUrl)")
                             group.leave()
                         } catch {}
                     })
@@ -40,8 +41,8 @@ class ShareViewController: UIViewController {
         }
 
         group.notify(queue: .main) {
-            self.userDefaults.set(urls, forKey: "urls")
-            self.userDefaults.synchronize()
+            userDefaults.set(urls, forKey: "urls")
+            userDefaults.synchronize()
             self.textarea.insertText("\(urls)\n\n")
             self.openURL(URL(string:"openwith://test")!)
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)

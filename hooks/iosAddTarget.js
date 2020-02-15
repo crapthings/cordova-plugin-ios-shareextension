@@ -9,6 +9,7 @@ function redError (message) {
 }
 
 function replacePreferencesInFile (filePath, preferences) {
+  console.log(filePath, JSON.stringify(preferences, null, 2))
   var content = fs.readFileSync(filePath, 'utf8')
   for (var i = 0; i < preferences.length; i++) {
     var pref = preferences[i]
@@ -124,6 +125,8 @@ function getPreferences (context, configXml, projectName) {
   if (getCordovaParameter(configXml, 'GROUP_IDENTIFIER') !== '') {
     group = getCordovaParameter(configXml, 'IOS_GROUP_IDENTIFIER')
   }
+
+  console.log('what is this now ???', JSON.stringify(plist, null, 2), plist['CFBundleURLTypes'][0]['CFBundleURLSchemes'][0])
   return [{
     key: '__DISPLAY_NAME__',
     value: projectName
@@ -141,7 +144,7 @@ function getPreferences (context, configXml, projectName) {
     value: plist.CFBundleVersion
   }, {
     key: '__URL_SCHEME__',
-    value: getCordovaParameter(configXml, 'IOS_URL_SCHEME')
+    value: plist['CFBundleURLTypes'][0]['CFBundleURLSchemes'][0]
   }, {
     key: '__UNIFORM_TYPE_IDENTIFIER__',
     value: getCordovaParameter(configXml, 'IOS_UNIFORM_TYPE_IDENTIFIER')
@@ -212,14 +215,14 @@ module.exports = function (context) {
     })
 
     // Find if the project already contains the target and group
-    var target = pbxProject.pbxTargetByName('ShareExt')
+    var target = pbxProject.pbxTargetByName('shareextension')
     if (target) {
-      console.log('    ShareExt target already exists.')
+      console.log('    shareextension target already exists.')
     }
 
     if (!target) {
       // Add PBXNativeTarget to the project
-      target = pbxProject.addTarget('ShareExt', 'app_extension', 'ShareExtension')
+      target = pbxProject.addTarget('shareextension', 'app_extension', 'ShareExtension')
 
       // Add a new PBXSourcesBuildPhase for our ShareViewController
       // (we can't add it to the existing one because an extension is kind of an extra app)
@@ -269,7 +272,7 @@ module.exports = function (context) {
           var buildSettingsObj = configurations[key].buildSettings
           if (typeof buildSettingsObj.PRODUCT_NAME !== 'undefined') {
             var productName = buildSettingsObj.PRODUCT_NAME
-            if (productName.indexOf('ShareExt') >= 0) {
+            if (productName.indexOf('shareextension') >= 0) {
               buildSettingsObj.PROVISIONING_PROFILE = PROVISIONING_PROFILE
               buildSettingsObj.DEVELOPMENT_TEAM = DEVELOPMENT_TEAM
               console.log('Added signing identities for extension!')

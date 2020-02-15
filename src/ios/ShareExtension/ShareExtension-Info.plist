@@ -20,6 +20,8 @@
 	<string>__BUNDLE_SHORT_VERSION_STRING__</string>
 	<key>CFBundleVersion</key>
 	<string>__BUNDLE_VERSION__</string>
+	<key>UrlScheme</key>
+	<string>__URL_SCHEME__</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
