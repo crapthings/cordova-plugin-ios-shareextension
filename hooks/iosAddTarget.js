@@ -9,7 +9,6 @@ function redError (message) {
 }
 
 function replacePreferencesInFile (filePath, preferences) {
-  console.log(filePath, JSON.stringify(preferences, null, 2))
   var content = fs.readFileSync(filePath, 'utf8')
   for (var i = 0; i < preferences.length; i++) {
     var pref = preferences[i]
@@ -126,7 +125,6 @@ function getPreferences (context, configXml, projectName) {
     group = getCordovaParameter(configXml, 'IOS_GROUP_IDENTIFIER')
   }
 
-  console.log('what is this now ???', JSON.stringify(plist, null, 2), plist['CFBundleURLTypes'][0]['CFBundleURLSchemes'][0])
   return [{
     key: '__DISPLAY_NAME__',
     value: projectName
