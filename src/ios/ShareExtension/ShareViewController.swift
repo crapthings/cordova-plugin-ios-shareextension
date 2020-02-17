@@ -48,13 +48,13 @@ class ShareViewController: UIViewController {
             userDefaults.synchronize()
             self.textarea.insertText("\(urls)\n\n")
             self.openURL(URL(string: "\(self.UrlScheme)://")!)
-            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+            self.close()
         }
     }
 
     @IBAction func btn(_ sender: UIButton) {
         self.openURL(URL(string: "\(self.UrlScheme)://")!)
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        close()
     }
 
     @objc func openURL(_ url: URL) -> Bool {
@@ -66,5 +66,10 @@ class ShareViewController: UIViewController {
             responder = responder?.next
         }
         return false
+    }
+
+    func close() {
+        self.extensionContext!.completeRequest(returningItems: nil, completionHandler: nil)
+        self.extensionContext!.cancelRequest(withError:NSError())
     }
 }
