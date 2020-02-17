@@ -15,7 +15,7 @@ class ShareViewController: UIViewController {
         let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.\(bundleIdentifier)")
         UrlScheme = Bundle.main.object(forInfoDictionaryKey: "UrlScheme") as! String
 
-        var urls: [String] = []
+        var urls = [[String: String]]()
 
         guard let extensionItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             return
@@ -35,7 +35,7 @@ class ShareViewController: UIViewController {
                         let targetUrl = (containerURL?.appendingPathComponent(newname))!
                         do {
                             try FileManager.default.copyItem(at: sourceUrl, to: targetUrl)
-                            urls.append("\(targetUrl)")
+                            urls.append(["uri": "\(targetUrl)", "filename": filename])
                             group.leave()
                         } catch {}
                     })
