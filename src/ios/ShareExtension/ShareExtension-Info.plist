@@ -27,7 +27,24 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
-			<string>TRUEPREDICATE</string>
+			<dict>
+        <key>NSExtensionActivationUsesStrictMatching</key>
+        <integer>0</integer>
+        <key>NSExtensionActivationSupportsAttachmentsWithMaxCount</key>
+        <integer>10</integer>
+        <key>NSExtensionActivationSupportsFileWithMaxCount</key>
+        <integer>10</integer>
+        <key>NSExtensionActivationSupportsImageWithMaxCount</key>
+        <integer>10</integer>
+        <key>NSExtensionActivationSupportsMovieWithMaxCount</key>
+        <integer>5</integer>
+        <key>NSExtensionActivationSupportsText</key>
+        <true/>
+        <key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
+        <integer>10</integer>
+        <key>NSExtensionActivationSupportsWebPageWithMaxCount</key>
+        <integer>10</integer>
+	    </dict>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>

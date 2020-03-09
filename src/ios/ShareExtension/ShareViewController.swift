@@ -47,13 +47,13 @@ class ShareViewController: UIViewController {
             userDefaults.set(urls, forKey: "urls")
             userDefaults.synchronize()
             self.textarea.insertText("\(urls)\n\n")
-            self.openURL(URL(string: "\(self.UrlScheme)://")!)
+            self.openURL(URL(string: "\(self.UrlScheme)://shareextension")!)
             self.close()
         }
     }
 
     @IBAction func btn(_ sender: UIButton) {
-        self.openURL(URL(string: "\(self.UrlScheme)://")!)
+        self.openURL(URL(string: "\(self.UrlScheme)://shareextension")!)
         close()
     }
 

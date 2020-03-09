@@ -18,6 +18,7 @@
         let result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: urls)
         result!.keepCallback = true
         self.commandDelegate.send(result, callbackId: _command!.callbackId!)
+        userDefaults.removeObject(forKey: "urls")
     }
 
     @objc(onFiles:) func onFiles(command: CDVInvokedUrlCommand) {
