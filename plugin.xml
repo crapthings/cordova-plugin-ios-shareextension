@@ -60,8 +60,9 @@
     <source-file src="src/ios/shareextension.swift" />
 
     <hook type="before_plugin_install" src="hooks/npmInstall.js" />
-    <hook type="before_plugin_install" src="hooks/iosCopyShareExtension.js" />
-    <hook type="after_plugin_add" src="hooks/iosAddTarget.js" />
+    <hook type="after_plugin_install" src="hooks/iosCopyShareExtension.js" />
+    <hook type="before_prepare" src="hooks/iosCopyShareExtension.js" />
+    <hook type="after_prepare" src="hooks/iosAddTarget.js" />
     <hook type="before_plugin_uninstall" src="hooks/iosRemoveTarget.js" />
 
     <framework src="MobileCoreServices.framework" />
