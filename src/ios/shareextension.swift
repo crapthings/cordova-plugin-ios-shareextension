@@ -12,13 +12,15 @@
     }
 
     @objc func sendUrls() {
-        let bundleIdentifier = Bundle.main.bundleIdentifier!
-        let userDefaults = UserDefaults(suiteName: "group.\(bundleIdentifier).shareextension")!
-        let urls = userDefaults.array(forKey: "urls")
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            return;
+        }
+        let userDefaults = UserDefaults(suiteName: "group.\(bundleIdentifier).shareextension")
+        let urls = userDefaults?.array(forKey: "urls")
         let result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: urls)
-        result!.keepCallback = true
-        self.commandDelegate.send(result, callbackId: _command!.callbackId!)
-        userDefaults.removeObject(forKey: "urls")
+        result?.keepCallback = true
+        self.commandDelegate.send(result, callbackId: _command?.callbackId)
+        userDefaults?.removeObject(forKey: "urls")
     }
 
     @objc(onFiles:) func onFiles(command: CDVInvokedUrlCommand) {
